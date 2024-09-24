@@ -1,0 +1,2 @@
+class Categories:
+    pass
