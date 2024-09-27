@@ -1,10 +1,10 @@
-
 from books import *
 from book_loan_requests import Request_manager
 from categories import *
 from customers import *
 from publishers import *
 from confirm import confirm_exit
+from Doc_Gia import *
 
 class_library = {
     "1": 'books',
@@ -36,7 +36,7 @@ if __name__ == "__main__":
             elif user_input == '3': 
                 pass
             elif user_input == '4':
-                pass
+                DocGia.chon_chuc_nang()
             elif user_input == '5':
                 Publishers.menu()
                 pass
