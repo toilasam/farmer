@@ -26,26 +26,7 @@ class Request_manager:
 
     @classmethod    
     def add_new_requests(cls):
-        print('Nhập thông tin:')
-        request_ID = input('Nhập mã mượn sách: ')
-        customer_ID = input('Nhap mã khách hàng: ')
-        loan_start_date = input('Nhâp ngày mượn sách: ')
-        loan_end_date = input('Nhâp ngày hẹn trả sách: ')
-        #return_date = input('Nhập ngày trả sách: ')
-        return_date = ''
-        book_ID = input('Nhập mã sách: ')
-        quantity = int(input('Nhập số lượng: '))
-
-        new_request_data = {
-        'Request_ID' : request_ID,
-        'Customer_ID': customer_ID,
-        'Loan_start_date': loan_start_date,
-        'Loan_end_date': loan_end_date,
-        'Return_Date' : return_date,
-        'Book_ID' : book_ID,
-        'Quantity' : quantity
-        }
-
+        new_request_data = new_request_data()
         # cls.add_new_requests(new_request_data)
         df = cls.load_request()
         df = pd.concat([df,pd.DataFrame([new_request_data])], ignore_index=True)
@@ -95,18 +76,84 @@ class Request_manager:
         else:
             print('Have a nice day.')
 
-    def show_late_loans(late_loans):            # hiển thị phiếu quá hạn
+    def show_late_loans(late_loans):                 # hiển thị phiếu quá hạn
         print('Các đơn sách bị quá hạn:')
         print(late_loans)
 
-    def update_returned():                      # cập nhật phiếu đã trả
+    def update_returned():                           # cập nhật phiếu đã trả
+
         pass
 
-    def statistic():                            # thống kê
+    def statistic():                                  # thống kê
+        print('Chức năng thông kê.')    
         pass    
 
 # sao lưu
 
+
+# Lấy dữ liệu
+    def get_infor():
+        date_format = "%Y-%m-%d"
+        print('Nhập thông tin:')
+        while True:
+            request_ID = input('Nhập mã mượn sách (7 ký tự): ')
+            if len(request_ID) == 7 and ' ' not in request_ID:
+                break
+            else:
+                print('Mã phải gồm 7 kí tự và không chứ khoảng trắng.')
+        while True:
+            customer_ID = input('Nhập mã khách hàng: ')
+            if len(customer_ID) == 7 and ' ' not in customer_ID:
+                break
+            else:
+                print('Mã phải gồm 7 kí tự và không chứ khoảng trắng.')   
+        while True:
+            book_ID = input('Nhập mã sách: ')
+            if len(book_ID) == 7 and ' ' not in book_ID:
+                break
+            else:
+                print('Mã phải gồm 7 kí tự và không chứ khoảng trắng.')
+                
+        while True:
+            loan_start_date = input('Nhập ngày mượn sách định dang (yyyy-mm-dd): ')
+            try:
+                datetime.strptime(loan_start_date, date_format)
+                break
+            except ValueError:
+                print('Nhập sai định dạng nhập lại')
+
+        while True:  
+            loan_end_date = input('Nhập ngày hẹn trả sách định dang (yyyy-mm-dd): ')
+            try:
+                datetime.strptime(loan_end_date, date_format)
+                break
+            except ValueError:
+                print('Sai định dạng mời nhập lại.')
+
+        return_date = ''
+        while True:
+            quantity = input('Nhập số lượng: ')
+            try:
+                quantity = int(quantity)
+                break
+            except ValueError:
+                print('Nhập số nguyên. ')
+
+
+        new_request_data = {
+        'Request_ID' : request_ID,
+        'Customer_ID': customer_ID,
+        'Loan_start_date': loan_start_date,
+        'Loan_end_date': loan_end_date,
+        'Return_Date' : return_date,
+        'Book_ID' : book_ID,
+        'Quantity' : quantity
+        }
+        
+        return new_request_data
+
+
+#################################
 
     def confirm_change(cls, df):
         confirm = input('Xác nhận (y/n): ').lower()
@@ -116,19 +163,33 @@ class Request_manager:
                 print('Đã huỷ thao tác.')
         else: print('Lựa chọn không hợp lệ.')    
         
-
     @classmethod
     def choose_action(cls):
-        # request_manager = Request_manager()
-        action = input("Nhập hành động (add, update, show, search, delete): ")
-        if action == 'add':         #1
+        print(''' 
+            1: Tạo phiếu mượn       6: Trả sách
+            2: Tìm kiếm             7: Thống kê
+            3: Cập nhật             8: Phiếu quá hạn
+            4: Hiển thị             9: Sao lưu
+            5: xoá phiếu mượn
+''')
+        action = input("Thao tác muốn thực hiện (1-9): ")
+        if action == '1':
             cls.add_new_requests()  
-        elif action == 'delete':    #2 
+        elif action == '2':    
             cls.del_requests()
-        elif action == 'update':    #3
+        elif action == '3':    
             pass
-        elif action == 'show':      #4
+        elif action == '3':     
             pass
-        elif action == 'search':    #5
+        elif action == '5':    
             pass
-        
+        elif action == '6':    
+            pass
+        elif action == '7':    
+            pass
+        elif action == '8':    
+            pass
+        elif action == '9':    
+            pass
+        else:
+            print('Thao tác không đúng.')
