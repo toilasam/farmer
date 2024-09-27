@@ -174,13 +174,13 @@ class Request_manager:
         if action == '1':
             cls.add_new_requests()  
         elif action == '2':    
-            cls.del_requests()
+            pass
         elif action == '3':    
             pass
         elif action == '3':     
             pass
         elif action == '5':    
-            pass
+            cls.del_requests()
         elif action == '6':    
             pass
         elif action == '7':    
