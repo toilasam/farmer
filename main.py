@@ -35,7 +35,7 @@ if __name__ == "__main__":
         elif user_input in class_library: # or user_input in list(class_library.values()): 
             if user_input == '1' or user_input == 'books': 
                 print('Sách')
-                Book_manager.choose_action()
+                pass
             elif user_input == '2' or user_input == 'requests':
                 print('Phiếu mượn')
                 Request_manager.choose_action()
