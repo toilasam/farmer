@@ -107,25 +107,25 @@ class Publishers:
             print("11. Thoát")
             lua_chon = input("Chọn chức năng từ 1-11: ")
             match lua_chon:
-            case '1':
-                cls.hien_thi_danh_sach()
-            case '2':
-                cls.tim_kiem_theo_ma()
-            case '3':
-                cls.tim_kiem_theo_ten()
-            case '4':
-                cls.them_moi()
-            case '5':
-                cls.xoa()
-            case '6':
-                cls.sap_xep_theo_ten()
-            case '7':
-                cls.dem_so_luong()
-            case'8':
-                cls.dao_nguoc_danh_sach()
-            case '11':
-                print("Thoát menu.")
-                break
-            case _:
-                print("Lựa chọn không hợp lệ, vui lòng chọn lại.")
+                case '1':
+                    cls.hien_thi_danh_sach()
+                case '2':
+                    cls.tim_kiem_theo_ma()
+                case '3':
+                    cls.tim_kiem_theo_ten()
+                case '4':
+                    cls.them_moi()
+                case '5':
+                    cls.xoa()
+                case '6':
+                    cls.sap_xep_theo_ten()
+                case '7':
+                    cls.dem_so_luong()
+                case'8':
+                    cls.dao_nguoc_danh_sach()
+                case '11':
+                    print("Thoát menu.")
+                    break
+                case _:
+                    print("Lựa chọn không hợp lệ, vui lòng chọn lại.")
 
