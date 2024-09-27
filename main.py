@@ -40,7 +40,7 @@ if __name__ == "__main__":
                 print('Phiếu mượn')
                 Request_manager.choose_action()
             elif user_input == '3': 
-                cate.menu_quan_ly()
+                #cate.menu_quan_ly()
                 # pass
             elif user_input == '4':
                 doc_gia = DocGia(ma='001', ten='John Doe', email='john@example.com', sdt='123456789')
