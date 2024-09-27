@@ -32,12 +32,14 @@ if __name__ == "__main__":
             elif user_input == '2' or user_input == 'requests':
                 print('Requests')
                 Request_manager.choose_action()
-            elif user_input == '3':
+            elif user_input == '3': 
+
                 pass
             elif user_input == '4':
-                pass
+                DocGia.chon_chuc_nang()
             elif user_input == '5':
-                pass
 
+                pass
         else:
-            print("Đối tượng không tồn tại. Vui lòng thử lại.")
+            print("Đối tượng không tồn tại. Vui lòng chọn lại.")
+
