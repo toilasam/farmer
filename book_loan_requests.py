@@ -26,8 +26,7 @@ class Request_manager:
 
     @classmethod    
     def add_new_requests(cls):
-        new_request_data = new_request_data()
-        # cls.add_new_requests(new_request_data)
+        new_request_data = cls.get_infor()
         df = cls.load_request()
         df = pd.concat([df,pd.DataFrame([new_request_data])], ignore_index=True)
         cls.confirm_change(cls,df)
@@ -88,10 +87,10 @@ class Request_manager:
         print('Chức năng thông kê.')    
         pass    
 
-# sao lưu
+                                                    # sao lưu   
 
-
-# Lấy dữ liệu
+                                                    # Lấy dữ liệu
+   
     def get_infor():
         date_format = "%Y-%m-%d"
         print('Nhập thông tin:')
@@ -113,7 +112,7 @@ class Request_manager:
                 break
             else:
                 print('Mã phải gồm 7 kí tự và không chứ khoảng trắng.')
-                
+
         while True:
             loan_start_date = input('Nhập ngày mượn sách định dang (yyyy-mm-dd): ')
             try:
@@ -138,7 +137,6 @@ class Request_manager:
                 break
             except ValueError:
                 print('Nhập số nguyên. ')
-
 
         new_request_data = {
         'Request_ID' : request_ID,
