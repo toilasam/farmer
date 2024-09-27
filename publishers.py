@@ -1,6 +1,4 @@
 class Publishers:
-    class Publishers:
-     
     Publishers = []
 
     @classmethod
