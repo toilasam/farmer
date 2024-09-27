@@ -1,11 +1,10 @@
 from books import *
 from book_loan_requests import Request_manager
-from categories import *
 
 from publishers import *
 from confirm import confirm_exit
 from Doc_gia import *
-import cate
+
 
 class_library = {
     "1": 'books',
