@@ -89,9 +89,9 @@ class DocGia:
                 print("Lựa chọn không hợp lệ. Vui lòng chọn lại.")
 
 # Đảm bảo thêm điều kiện này
-if __name__ == "__main__":
-    ds_doc_gia = []  # Khởi tạo danh sách độc giả
-    doc_gia = DocGia(ma='001', ten='John Doe', email='john@example.com', sdt='123456789')
-    ds_doc_gia.append(doc_gia)  # Thêm độc giả vào danh sách
-    doc_gia.chon_chuc_nang(ds_doc_gia)  # Gọi phương thức chọn chức năng từ đối tượng 
+#if __name__ == "__main__":
+   # ds_doc_gia = []  # Khởi tạo danh sách độc giả
+   # doc_gia = DocGia(ma='001', ten='John Doe', email='john@example.com', sdt='123456789')
+    #ds_doc_gia.append(doc_gia)  # Thêm độc giả vào danh sách
+   # doc_gia.chon_chuc_nang(ds_doc_gia)  # Gọi phương thức chọn chức năng từ đối tượng 
 
