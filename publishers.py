@@ -106,26 +106,26 @@ class Publishers:
             print("8. Đảo ngược danh sach NXB")
             print("11. Thoát")
             lua_chon = input("Chọn chức năng từ 1-11: ")
-
-            if lua_chon == '1':
+            match lua_chon:
+            case '1':
                 cls.hien_thi_danh_sach()
-            elif lua_chon == '2':
+            case '2':
                 cls.tim_kiem_theo_ma()
-            elif lua_chon == '3':
+            case '3':
                 cls.tim_kiem_theo_ten()
-            elif lua_chon == '4':
+            case '4':
                 cls.them_moi()
-            elif lua_chon == '5':
+            case '5':
                 cls.xoa()
-            elif lua_chon == '6':
+            case '6':
                 cls.sap_xep_theo_ten()
-            elif lua_chon == '7':
+            case '7':
                 cls.dem_so_luong()
-            elif lua_chon == '8':
+            case'8':
                 cls.dao_nguoc_danh_sach()
-            elif lua_chon == '11':
+            case '11':
                 print("Thoát menu.")
                 break
-            else:
+            case _:
                 print("Lựa chọn không hợp lệ, vui lòng chọn lại.")
 
