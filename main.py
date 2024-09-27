@@ -1,5 +1,6 @@
+
 from books import *
-from book_loan_requests import *
+from book_loan_requests import Request_manager
 from categories import *
 from customers import *
 from publishers import *
@@ -33,12 +34,11 @@ if __name__ == "__main__":
                 print('Requests')
                 Request_manager.choose_action()
             elif user_input == '3': 
-
                 pass
             elif user_input == '4':
-                DocGia.chon_chuc_nang()
+                pass
             elif user_input == '5':
-
+                Publishers.menu()
                 pass
         else:
             print("Đối tượng không tồn tại. Vui lòng chọn lại.")
