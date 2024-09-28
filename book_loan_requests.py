@@ -37,7 +37,6 @@ class Request_manager:
         cls.confirm_change()
         print('Cập nhật thông tin')
         
-
     @classmethod
     def show_requests():
         print('Hien thi')
@@ -80,17 +79,28 @@ class Request_manager:
         print(late_loans)
 
     def update_returned():                           # cập nhật phiếu đã trả
-
-        pass
+        print('Trả sách')
+        
 
     def statistic():                                  # thống kê
         print('Chức năng thông kê.')    
         pass    
 
-                                                    # sao lưu   
+    def backup():
+        print('Sao lưu')                        # sao lưu   
 
-                                                    # Lấy dữ liệu
-   
+    # @classmethod
+    # def check_date(cls):
+    #     date_format = "%Y-%m-%d"
+    #     while True:  
+    #         s = input()
+    #         try:
+    #             datetime.strptime(s, date_format)
+    #             break
+    #         except ValueError:
+    #             print('Sai định dạng mời nhập lại.')
+    #         return s
+
     def get_infor():
         date_format = "%Y-%m-%d"
         print('Nhập thông tin:')
@@ -150,7 +160,8 @@ class Request_manager:
         
         return new_request_data
 
-
+#################################
+      
 #################################
 
     def confirm_change(cls, df):
@@ -163,31 +174,35 @@ class Request_manager:
         
     @classmethod
     def choose_action(cls):
-        print(''' 
-            1: Tạo phiếu mượn       6: Trả sách
-            2: Tìm kiếm             7: Thống kê
-            3: Cập nhật             8: Phiếu quá hạn
-            4: Hiển thị             9: Sao lưu
-            5: xoá phiếu mượn
-''')
-        action = input("Thao tác muốn thực hiện (1-9): ")
-        if action == '1':
-            cls.add_new_requests()  
-        elif action == '2':    
-            pass
-        elif action == '3':    
-            pass
-        elif action == '3':     
-            pass
-        elif action == '5':    
-            cls.del_requests()
-        elif action == '6':    
-            pass
-        elif action == '7':    
-            pass
-        elif action == '8':    
-            pass
-        elif action == '9':    
-            pass
-        else:
-            print('Thao tác không đúng.')
+        while True:
+            print(''' 
+                1: Tạo phiếu mượn       6: Trả sách
+                2: Tìm kiếm             7: Thống kê
+                3: Cập nhật             8: Phiếu quá hạn
+                4: Hiển thị             9: Sao lưu
+                5: xoá phiếu mượn       0: Quay lại
+    ''')
+        
+            action = input("Thao tác muốn thực hiện (0-9): ")
+            if action == '1':
+                cls.add_new_requests()
+            elif action == '2':    
+                cls.search_requests()
+            elif action == '3':    
+                cls.update_requests()
+            elif action == '4':     
+                cls.load_request()
+            elif action == '5':    
+                cls.del_requests()
+            elif action == '6':    
+                cls.update_returned()
+            elif action == '7':    
+                cls.statistic()
+            elif action == '8':    
+                cls.show_late_loans()
+            elif action == '9':    
+                cls.backup()
+            elif action == '0':
+                break
+            else:
+                print('Thao tác không đúng.')
