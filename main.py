@@ -1,4 +1,3 @@
-from books import *
 from book_loan_requests import Request_manager
 from publishers import *
 from confirm import confirm_exit
