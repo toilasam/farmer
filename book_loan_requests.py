@@ -192,7 +192,7 @@ class Request_manager:
             elif action == '3':    
                 print("Cập nhật")
             elif action == '4':     
-                cls.load_request()
+                print('Hien thi')
             elif action == '5':    
                 cls.del_requests()
             elif action == '6':    
