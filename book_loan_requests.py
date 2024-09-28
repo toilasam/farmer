@@ -32,10 +32,11 @@ class Request_manager:
         cls.confirm_change(cls,df)
 
     @classmethod
-    def update_requests(cls):
-        df = 1
-        cls.confirm_change()
-        print('Cập nhật thông tin')
+    def update_requests():
+        # df = 1
+        # cls.confirm_change()
+        # print('Cập nhật thông tin')
+        print('Câp nhật')
         
     @classmethod
     def show_requests():
@@ -74,9 +75,9 @@ class Request_manager:
         else:
             print('Have a nice day.')
 
-    def show_late_loans(late_loans):                 # hiển thị phiếu quá hạn
+    def show_late_loans():                 # hiển thị phiếu quá hạn
         print('Các đơn sách bị quá hạn:')
-        print(late_loans)
+        # print(late_loans)
 
     def update_returned():                           # cập nhật phiếu đã trả
         print('Trả sách')
@@ -189,7 +190,7 @@ class Request_manager:
             elif action == '2':    
                 cls.search_requests()
             elif action == '3':    
-                cls.update_requests()
+                print("Cập nhật")
             elif action == '4':     
                 cls.load_request()
             elif action == '5':    
