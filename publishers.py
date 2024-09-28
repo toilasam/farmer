@@ -91,6 +91,13 @@ class Publishers:
             cls.Publishers.reverse()
             print("Danh sách nhà xuất bản đã được đảo ngược.")
             cls.hien_thi_danh_sach()
+        @staticmethod
+        def confirm_action(message):
+            while True:
+                confirm = input(f"{message} (Y/N): ").strip().upper()
+                if confirm in ['Y', 'N']:
+                    return confirm == 'Y'
+                print("Lựa chọn không hợp lệ, vui lòng chọn Y hoặc N.")
 
     @classmethod
     def menu(cls):
