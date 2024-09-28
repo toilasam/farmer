@@ -131,6 +131,7 @@ class Publishers:
                 case'8':
                     cls.dao_nguoc_danh_sach()
                 case '11':
+                    if cls.confirm_action("Bạn có chắc chăn muốn thoát hay không: "):
                     print("Thoát menu.")
                     break
                 case _:
