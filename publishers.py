@@ -91,8 +91,8 @@ class Publishers:
             cls.Publishers.reverse()
             print("Danh sách nhà xuất bản đã được đảo ngược.")
             cls.hien_thi_danh_sach()
-        @staticmethod
-        def confirm_action(message):
+        @classmethod
+        def confirm_action(cls,message):
             while True:
                 confirm = input(f"{message} (Y/N): ").strip().upper()
                 if confirm in ['Y', 'N']:
@@ -111,6 +111,7 @@ class Publishers:
             print("6. Sắp xếp theo tên")
             print("7. Đếm số lượng NXB")
             print("8. Đảo ngược danh sach NXB")
+            print("9. Cập nhật")
             print("11. Thoát")
             lua_chon = input("Chọn chức năng từ 1-11: ")
             match lua_chon:
@@ -130,6 +131,8 @@ class Publishers:
                     cls.dem_so_luong()
                 case'8':
                     cls.dao_nguoc_danh_sach()
+                case'9':
+                    cls.cap_nhat()
                 case '11':
                     if cls.confirm_action("Bạn có chắc chăn muốn thoát hay không: "):
                         print("Thoát menu.")
