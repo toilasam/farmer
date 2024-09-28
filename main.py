@@ -1,10 +1,11 @@
 from books import *
 from book_loan_requests import Request_manager
-
 from publishers import *
 from confirm import confirm_exit
-from Doc_gia import *
 
+from Doc_gia import *
+from son import *
+from thanh import *
 
 class_library = {
     "1": 'books',
@@ -35,12 +36,12 @@ if __name__ == "__main__":
         elif user_input in class_library: # or user_input in list(class_library.values()): 
             if user_input == '1' or user_input == 'books': 
                 print('Sách')
-                pass
+                menu()
             elif user_input == '2' or user_input == 'requests':
                 print('Phiếu mượn')
                 Request_manager.choose_action()
             elif user_input == '3': 
-                #cate.menu_quan_ly()
+                menu_quan_ly()
                 # pass
             elif user_input == '4':
                 doc_gia = DocGia(ma='001', ten='John Doe', email='john@example.com', sdt='123456789')
