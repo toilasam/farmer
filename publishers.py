@@ -44,7 +44,6 @@ class Publishers:
         dia_chi = input("Nhập địa chỉ: ")
         email = input("Nhập Email: ")
         sdt = input("Nhập số điện thoại: ")
-
         # Thêm thông tin mới vào danh sách Publishers
         cls.Publishers.append({'ma': ma, 'ten': ten, 'dia_chi': dia_chi, 'email': email, 'sdt': sdt})
         print("Cập nhật thông tin Nhà Xuất Bản thành công.")
@@ -112,7 +111,7 @@ class Publishers:
             print("7. Đếm số lượng NXB")
             print("8. Đảo ngược danh sach NXB")
             print("9. Cập nhật")
-            print("11. Thoát")
+            print("10. Thoát")
             lua_chon = input("Chọn chức năng từ 1-11: ")
             match lua_chon:
                 case '1':
@@ -133,7 +132,7 @@ class Publishers:
                     cls.dao_nguoc_danh_sach()
                 case'9':
                     cls.cap_nhat()
-                case '11':
+                case '10':
                     if cls.confirm_action("Bạn có chắc chăn muốn thoát hay không: "):
                         print("Thoát menu.")
                     break
