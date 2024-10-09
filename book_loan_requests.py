@@ -1,6 +1,7 @@
 import pandas as pd
 from datetime import datetime
 
+
 class Book_loan_requests:
     def __init__(self, request_ID, customer_ID, loan_start_date, loan_end_date, return_date, book_ID, quantity):
         self.request_ID = request_ID
@@ -20,6 +21,7 @@ class Request_manager:
             return pd.read_excel(cls.file_path)
         except FileNotFoundError:
             return pd.DataFrame(columns=['Request_ID','Customer_ID','Loan_start_date','Loan_end_date','Return_Date','Book_ID','Quantity'])
+    
     @classmethod
     def save_request(cls, df):
         df.to_excel(cls.file_path, index = False)
@@ -45,8 +47,12 @@ class Request_manager:
     @classmethod    
     def search_requests(cls):
         print('Tìm kiếm')
-        info_search = input('Nhập thông tin cần tìm: ')
+        info_search = input('Nhập mã đơn hoặc mã khách hàng: ')
         df = cls.load_request()
+        dfrq = df[df['Request_ID'] == info_search]
+        dfc = df[df['Customer_ID'] == info_search]
+        df = pd.concat([dfrq, dfc], axis=0)
+        return df
 
     @classmethod
     def del_requests(cls):
@@ -75,20 +81,56 @@ class Request_manager:
         else:
             print('Have a nice day.')
 
-    def show_late_loans():                 # hiển thị phiếu quá hạn
+    @classmethod
+    def show_late_loans(cls):                 # hiển thị phiếu quá hạn
         print('Các đơn sách bị quá hạn:')
-        # print(late_loans)
+        print(cls.check_loans())
 
-    def update_returned():                           # cập nhật phiếu đã trả
+    def update_returned(cls):                          # cập nhật phiếu đã trả
+        df = cls.load_request()
+
+
         print('Trả sách')
         
 
-    def statistic():                                  # thống kê
-        print('Chức năng thông kê.')    
-        pass    
+    @classmethod
+    def statistic(cls):         # thống kê
+        df = cls.load_request()
+        so_don = df['Request_ID'].count()
+        print(f'Tổng số đơn mượn sách: {so_don}')
+                                        
+        print('Chức năng thông kê.')  
 
-    def backup():
-        print('Sao lưu')                        # sao lưu   
+
+    
+
+    @classmethod
+    def backup(cls): 
+        file_path_backup = "book_loan_requests_backup.xlsx"
+        df = cls.load_request()
+        while True:
+            confirm = input('Xác nhận (y/n): ').lower()
+            if confirm == 'y':
+                df.to_excel(file_path_backup, index = False)
+                print('Thao tác thành công.')
+                break
+            elif confirm == 'n':
+                print('Đã huỷ thao tác.')
+                break
+            else: print('Lựa chọn không hợp lệ. Chọn lại.')      
+
+                               
+
+    def confirm_change(cls, df):
+        while True:
+            confirm = input('Xác nhận (y/n): ').lower()
+            if confirm == 'y':
+                cls.save_request(df), print('Thao tác thành công.')
+                break
+            elif confirm == 'n':
+                print('Đã huỷ thao tác.')
+                break
+            else: print('Lựa chọn không hợp lệ. Chọn lại.')  
 
     # @classmethod
     # def check_date(cls):
@@ -162,16 +204,6 @@ class Request_manager:
         return new_request_data
 
 #################################
-      
-#################################
-
-    def confirm_change(cls, df):
-        confirm = input('Xác nhận (y/n): ').lower()
-        if confirm == 'y':
-            cls.save_request(df), print('Thực hiện thành công.')
-        elif confirm == 'n':
-                print('Đã huỷ thao tác.')
-        else: print('Lựa chọn không hợp lệ.')    
         
     @classmethod
     def choose_action(cls):
@@ -188,7 +220,7 @@ class Request_manager:
             if action == '1':
                 cls.add_new_requests()
             elif action == '2':    
-                cls.search_requests()
+                print(cls.search_requests())
             elif action == '3':    
                 print("Cập nhật")
             elif action == '4':     
