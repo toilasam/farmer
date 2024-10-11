@@ -1,16 +1,18 @@
 import pandas as pd
 from datetime import datetime
+import panel as pn
+import matplotlib.pyplot as plt
+pn.extension()
 
-
-class Book_loan_requests:
-    def __init__(self, request_ID, customer_ID, loan_start_date, loan_end_date, return_date, book_ID, quantity):
-        self.request_ID = request_ID
-        self.customer_ID = customer_ID
-        self.loan_start_date = loan_start_date
-        self.loan_end_date = loan_end_date
-        self.return_date = return_date
-        self.book_ID = book_ID
-        self.quantity = quantity
+# class Book_loan_requests:
+#     def __init__(self, request_ID, customer_ID, loan_start_date, loan_end_date, return_date, book_ID, quantity):
+#         self.request_ID = request_ID
+#         self.customer_ID = customer_ID
+#         self.loan_start_date = loan_start_date
+#         self.loan_end_date = loan_end_date
+#         self.return_date = return_date
+#         self.book_ID = book_ID
+#         self.quantity = quantity
 
 class Request_manager:
     file_path = 'book_loan_requests.xlsx'
@@ -34,15 +36,40 @@ class Request_manager:
         cls.confirm_change(cls,df)
 
     @classmethod
-    def update_requests():
-        # df = 1
-        # cls.confirm_change()
-        # print('Cập nhật thông tin')
+    def update_requests(cls):
         print('Câp nhật')
-        
+        df = cls.load_request()
+        while True:
+            request_id_ud = input('Nhập mã sách muốn cập nhật: ')
+            if request_id_ud in list(df['Request_ID']):
+                break
+            else:
+                print('Mã mượn sách không tồn tại.')
+        print(f'Nhập thông tin cho mã đơn {request_id_ud}')
+        customer_id_ud = input('Nhâp mã khách hàng: ')
+        loan_start_date_ud = input('Nhập ngày mượn sách: ')
+        loan_end_date_ud = input('Nhập ngày phải trả sách: ')
+        book_id_ud = input('Nhập mã sách: ')
+        while True:
+            quantity_ud = input('Nhập số lượng sách mượn: ')
+            try:
+                quantity_ud = int(quantity_ud)
+                if quantity_ud < 0:
+                    print('Số lượng phải lớn hơn 0.')
+                else:
+                    break
+            except ValueError:
+                print('Số lượng phải là số nguyên: ')
+
+        df.loc[df['Request_ID'] == request_id_ud, ['Customer_ID', 'Loan_start_date', 'Loan_end_date', 'Book_ID', 'Quantity']] = customer_id_ud, loan_start_date_ud, loan_end_date_ud, book_id_ud, quantity_ud
+
+        cls.confirm_change()
+
     @classmethod
-    def show_requests():
-        print('Hien thi')
+    def show_requests(cls):
+        df = cls.load_request()
+        df50  = df.tail(50)
+        print(df50)
 
     @classmethod    
     def search_requests(cls):
@@ -86,23 +113,42 @@ class Request_manager:
         print('Các đơn sách bị quá hạn:')
         print(cls.check_loans())
 
+    @classmethod
     def update_returned(cls):                          # cập nhật phiếu đã trả
-        df = cls.load_request()
-
-
         print('Trả sách')
+        date = datetime.today().strftime("%m/%d/%Y")
+        df = cls.load_request()
+        lr_ID = input('Nhập mã phiếu muốn trả: ')
+        df.loc[df['Request_ID'] == lr_ID, 'Return_date'] =  date
+        cls.confirm_change(cls, df)
         
 
-    @classmethod
-    def statistic(cls):         # thống kê
+    @classmethod                  #"%m/%d/%Y"                
+    def statistic(cls):
+        print('Chức năng thống kê.')                  
         df = cls.load_request()
-        so_don = df['Request_ID'].count()
-        print(f'Tổng số đơn mượn sách: {so_don}')
-                                        
-        print('Chức năng thông kê.')  
+
+        df['Loan_start_date'] = pd.to_datetime(df['Loan_start_date'], format="%m/%d/%Y", errors='coerce')
+
+        total_request = df['Request_ID'].count()
+        print(f'Tổng số đơn mượn sách: {total_request}')
+        total_book = df['Quantity'].sum()
+        print(f'Tổng số sách được mượn: {total_book}')
+        
+        df_group = df.groupby('Loan_start_date').size()
+
+        plt.figure(figsize=(10, 6))
+        plt.plot(df_group.index, df_group, marker='o', linestyle='-', color='b')
+
+        plt.title('Số đơn mượn sách', fontsize=16)
+        plt.xlabel('Ngày', fontsize=12)
+        plt.ylabel('Số lượng', fontsize=12)
+        plt.xticks(rotation=45)
+
+        plt.tight_layout()
+        plt.show()
 
 
-    
 
     @classmethod
     def backup(cls): 
@@ -142,32 +188,32 @@ class Request_manager:
     #             break
     #         except ValueError:
     #             print('Sai định dạng mời nhập lại.')
-    #         return s
+    #      return s
 
     def get_infor():
-        date_format = "%Y-%m-%d"
+        date_format = "%m/%d/%Y"
         print('Nhập thông tin:')
         while True:
             request_ID = input('Nhập mã mượn sách (7 ký tự): ')
             if len(request_ID) == 7 and ' ' not in request_ID:
                 break
             else:
-                print('Mã phải gồm 7 kí tự và không chứ khoảng trắng.')
+                print('Mã phải gồm 7 kí tự và không chứa khoảng trắng.')
         while True:
             customer_ID = input('Nhập mã khách hàng: ')
             if len(customer_ID) == 7 and ' ' not in customer_ID:
                 break
             else:
-                print('Mã phải gồm 7 kí tự và không chứ khoảng trắng.')   
+                print('Mã phải gồm 7 kí tự và không chứa khoảng trắng.')   
         while True:
             book_ID = input('Nhập mã sách: ')
             if len(book_ID) == 7 and ' ' not in book_ID:
                 break
             else:
-                print('Mã phải gồm 7 kí tự và không chứ khoảng trắng.')
+                print('Mã phải gồm 7 kí tự và không chứa khoảng trắng.')
 
         while True:
-            loan_start_date = input('Nhập ngày mượn sách định dang (yyyy-mm-dd): ')
+            loan_start_date = input('Nhập ngày mượn sách định dang (mm/dd/yyyy): ')
             try:
                 datetime.strptime(loan_start_date, date_format)
                 break
@@ -175,7 +221,7 @@ class Request_manager:
                 print('Nhập sai định dạng nhập lại')
 
         while True:  
-            loan_end_date = input('Nhập ngày hẹn trả sách định dang (yyyy-mm-dd): ')
+            loan_end_date = input('Nhập ngày hẹn trả sách định dang (mm/dd/yyyy): ')
             try:
                 datetime.strptime(loan_end_date, date_format)
                 break
@@ -184,12 +230,15 @@ class Request_manager:
 
         return_date = ''
         while True:
-            quantity = input('Nhập số lượng: ')
+            quantity = input('Nhập số lượng sách mượn: ')
             try:
-                quantity = int(quantity)
-                break
+                qu = int(quantity)
+                if quantity < 0:
+                    print('Số lượng phải lớn hơn 0.')
+                else:
+                    break
             except ValueError:
-                print('Nhập số nguyên. ')
+                print('Số lượng phải là số nguyên: ')
 
         new_request_data = {
         'Request_ID' : request_ID,
@@ -200,7 +249,6 @@ class Request_manager:
         'Book_ID' : book_ID,
         'Quantity' : quantity
         }
-        
         return new_request_data
 
 #################################
@@ -213,8 +261,9 @@ class Request_manager:
                 2: Tìm kiếm             7: Thống kê
                 3: Cập nhật             8: Phiếu quá hạn
                 4: Hiển thị             9: Sao lưu
-                5: xoá phiếu mượn       0: Quay lại
+                5: Xoá phiếu mượn       0: Quay lại
     ''')
+    # 2
         
             action = input("Thao tác muốn thực hiện (0-9): ")
             if action == '1':
@@ -222,9 +271,10 @@ class Request_manager:
             elif action == '2':    
                 print(cls.search_requests())
             elif action == '3':    
-                print("Cập nhật")
+                cls.update_requests()
             elif action == '4':     
                 print('Hien thi')
+                cls.show_requests()
             elif action == '5':    
                 cls.del_requests()
             elif action == '6':    
@@ -238,4 +288,4 @@ class Request_manager:
             elif action == '0':
                 break
             else:
-                print('Thao tác không đúng.')
+                print('Thao tác sai.')
