@@ -19,7 +19,7 @@ if __name__ == "__main__":
     # Bạn có thể khởi tạo một số độc giả mẫu nếu cần
     doc_gia1 = DocGia(ma='001', ten='John Doe', email='john@example.com', sdt='123456789')
     ds_doc_gia.append(doc_gia1)
-
+    quan_ly_doc_gia = QuanLyDocGia()
 
     while True:
         print('-------------Chương Trình Quản Lý Thư Viện------------')
@@ -43,8 +43,7 @@ if __name__ == "__main__":
                 menu_quan_ly()
                 # pass
             elif user_input == '4':
-                doc_gia = DocGia(ma='001', ten='John Doe', email='john@example.com', sdt='123456789')
-                doc_gia.chon_chuc_nang(ds_doc_gia)  # Gọi phương thức từ đối tượng và truyền ds_doc_gia
+                quan_ly_doc_gia.chon_chuc_nang(ds_doc_gia)
             elif user_input == '5':
                 Publishers.menu()
         else:
