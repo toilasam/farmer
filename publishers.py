@@ -90,49 +90,11 @@ class Publishers:
             cls.Publishers.reverse()
             print("Danh sách nhà xuất bản đã được đảo ngược.")
             cls.hien_thi_danh_sach()
-        @classmethod
-        def confirm_action(cls,message):
-            while True:
-                confirm = input(f"{message} (Y/N): ").strip().upper()
-                if confirm in ['Y', 'N']:
-                    return confirm == 'Y'
-                print("Lựa chọn không hợp lệ, vui lòng chọn Y hoặc N.")
 
-    @classmethod
-    def menu(cls):
-        while True:
-            print("Quản lý nhà xuất bản:")
-            print("1. Hiển thị danh sách")
-            print("2. Tìm kiếm theo mã")
-            print("3. Tìm kiếm theo tên")
-            print("4. Thêm mới")
-            print("5. Xóa")
-            print("6. Sắp xếp theo tên")
-            print("7. Đếm số lượng NXB")
-            print("8. Đảo ngược danh sach NXB")
-            print("9. Cập nhật")
-            print("10. Thoát")
-            lua_chon = input("Chọn chức năng từ 1-11: ")
-            match lua_chon:
-                case '1':
-                    cls.hien_thi_danh_sach()
-                case '2':
-                    cls.tim_kiem_theo_ma()
-                case '3':
-                    cls.tim_kiem_theo_ten()
-                case '4':
-                    cls.them_moi()
-                case '5':
-                    cls.xoa()
-                case '6':
-                    cls.sap_xep_theo_ten()
-                case '7':
-                    cls.dem_so_luong()
-                case'8':
-                    cls.dao_nguoc_danh_sach()
-                case'9':
-                    cls.cap_nhat()
-                case '10':
+        @classmethod
+    def loc_theo_ma(cls):
+        ma = input("Mời bạn nhập mã nhà xuất bản để lọc: ").lower()
+11':
                     if cls.confirm_action("Bạn có chắc chăn muốn thoát hay không: "):
                         print("Thoát menu.")
                     break
